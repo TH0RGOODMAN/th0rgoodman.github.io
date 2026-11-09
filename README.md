@@ -2,10 +2,11 @@
 
 Personal homepage: **https://hea1.org/**
 
-The creator-style design uses warm paper, coral/cobalt/yellow geometric shapes, three arrangement states and three page palettes. Under the public name **hea1**, it connects two runnable experiments and design notes:
+The creator-style design uses warm paper, coral/cobalt/yellow geometric shapes, three arrangement states and three page palettes. Under the public name **hea1**, it connects three runnable experiments and design notes:
 
 - [Assembly Training Lab](https://hea1.org/assembly-training-lab/): sequence, position and orientation constraints in a 3D teaching prototype.
 - [Evacuation Pathfinding Lab](https://hea1.org/evacuation-pathfinding-lab/): shortest and risk-weighted A* on synthetic static grids, with editable maps and reproducible export.
+- [Engineering Optimization Examples](https://hea1.org/engineering-optimization-examples/): exact two-machine weighted completion scheduling with editable synthetic inputs and Gantt comparisons.
 - [Experiment notes](https://hea1.org/notes/): explanations of the corresponding rules and tradeoffs.
 
 ## Files and maintenance
@@ -15,8 +16,8 @@ The creator-style design uses warm paper, coral/cobalt/yellow geometric shapes, 
 - `site.js`: arrangement and palette controls. State lives only in the current page.
 - `assets/assembly.jpg`: actual screenshot of the public assembly project; the original PNG is preserved.
 - `assets/share.png`: local, geometric social sharing artwork.
-- `assets/pathfinding.jpg`: actual browser screenshot of the pathfinding experiment.
-- `notes/`: index and two self-contained design notes; no client-side build or Markdown processing required.
+- `assets/pathfinding.jpg` and `assets/scheduling.jpg`: actual browser screenshots of the pathfinding and scheduling experiments.
+- `notes/`: index and three self-contained design notes; no client-side build or Markdown processing required.
 - `feed.xml`: Atom summaries for the notes. Update it and `sitemap.xml` when publishing a new note.
 - `404.html`, `robots.txt`, `sitemap.xml`: navigation and indexing support.
 

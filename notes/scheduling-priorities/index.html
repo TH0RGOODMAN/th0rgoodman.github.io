@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>谁先加工，为什么要看权重？ · hea1</title><meta name="description" content="用双机调度的小例子，区分加权完工时间、输入顺序和全部完成的时刻。"><meta name="theme-color" content="#fcf9f2"><link rel="canonical" href="https://hea1.org/notes/scheduling-priorities/"><link rel="icon" href="../../favicon.svg" type="image/svg+xml"><meta property="og:type" content="article"><meta property="og:title" content="谁先加工，为什么要看权重？ · hea1"><meta property="og:description" content="用双机调度的小例子，区分加权完工时间、输入顺序和全部完成的时刻。"><meta property="og:url" content="https://hea1.org/notes/scheduling-priorities/"><meta property="og:image" content="https://hea1.org/assets/share.png"><meta name="twitter:card" content="summary_large_image"><link rel="stylesheet" href="../../styles.css"><link rel="alternate" type="application/atom+xml" title="hea1 的实验笔记" href="../../feed.xml"></head>
+<body data-palette="warm"><a class="skip-link" href="#article">跳至正文</a><div class="canvas-wrap"><header class="play-header"><a href="../../" class="logo-pill">● ■ ◆ hea1</a><nav class="play-nav" aria-label="导航"><a href="../../#projects">作品</a><a href="../">笔记</a><a href="https://github.com/TH0RGOODMAN">GitHub ↗</a></nav></header><main class="article-shell" id="article"><div class="article-heading"><span class="greeting-sticker">建模 × 调度 · 实验笔记</span><h1>谁先加工，为什么要看权重？</h1><p class="article-lead">用双机调度的小例子，区分加权完工时间、输入顺序和全部完成的时刻。</p><p class="article-meta"><time datetime="2026-11-09">2026 年 11 月 9 日</time> · hea1 · AI 辅助整理</p></div><article class="article-body">
+<p>同一批订单，在两台机器上加工。每个订单都想尽早完成，但它们的重要程度不同。先做最短的，先做最重要的，还是先给最空闲的机器？</p>
+<p><a href="../../engineering-optimization-examples/">双机调度实验室</a>让这些选择可以直接比较：编辑每个订单的工时和权重，观察分配、顺序和目标值怎样变化。</p>
+<figure><img src="../../assets/scheduling.jpg" width="1280" height="1000" loading="lazy" alt="实际双机调度界面：输入订单工时与权重，下方显示直观派单和精确最优安排的时间表"><figcaption>默认合成场景：加权完工时间119与83，两方案的总工期都是9。</figcaption></figure>
+<h2>先问“早完成”是什么意思</h2>
+<p>这里的订单全部在时刻0可用。一个订单的完工时间C，包含它开始前的等待和自己的加工时间。权重w表示它晚完成一个时间单位的代价。目标是：</p>
+<pre><code>min Σ wᵢ × Cᵢ
+Cᵢ：订单 i 的完工时间
+wᵢ：订单 i 的优先权重</code></pre>
+<p>加权完工时间和总工期是两个指标。前者关心每个订单何时完成、权重多大；后者只看最后一个订单结束的时刻。一个方案可能降低前者，却让后者增加。</p>
+<h2>直观派单漏掉了什么？</h2>
+<p>基线按输入顺序读订单，将当前订单追加到能让它最早完工的机器。它知道机器的已有负荷和本单工时，却不使用权重来决定先后，也不看后续订单。</p>
+<p>默认例子中，这样得到机器1的A→C→E、机器2的B→D→F。高权重的E在队尾，较低权重的B在队首。重新安排后，机器1变成E→C→A，机器2变成D→F→B。</p>
+<div class="article-table"><table><thead><tr><th>方案</th><th>ΣwC</th><th>总工期</th><th>完工时间总和</th></tr></thead><tbody><tr><td>直观派单</td><td>119</td><td>9</td><td>36</td></tr><tr><td>精确最优</td><td>83</td><td>9</td><td>34</td></tr></tbody></table></div>
+<p>再把F的权重从3改成10，优化方案会让它先在机器2加工，并在时刻4完成。这个变化不是“所有人都更快”，而是当前目标更重视了F的等待。</p>
+<h2>为什么是工时除以权重？</h2>
+<p>先固定哪些订单交给一台机器。比较相邻订单i、j的两种顺序，设它们从同一时刻开始，后续订单的完成时刻不会因交换这两单而改变。</p>
+<pre><code>i → j 的代价 − j → i 的代价
+= wⱼ × pᵢ − wᵢ × pⱼ</code></pre>
+<p>当pᵢ/wᵢ ≤ pⱼ/wⱼ，把i放前面不会更差。这就是这个模型里的Smith排序规则。它兼顾工时和权重：权重大但工时很长的订单，不一定应该永远最先做。</p>
+<p>两台机器的工时可能不同，所以还要决定分给哪台。最多8单时，分配只有2⁸=256种；逐一分配，在每台机器内部使用这个最优顺序，取目标最小值，得到限定模型的全局最优。</p>
+<h2>如何确认这个“最优”？</h2>
+<p>生产算法与<a href="https://github.com/TH0RGOODMAN/engineering-optimization-examples/blob/main/tests/scheduling.test.mjs">独立测试基准</a>走不同路线。基准直接枚举订单全排列和两台机器的分割点，覆盖全部机器顺序，不使用Smith规则。</p>
+<p>3组预设和60组固定种子随机输入的最优目标一致；输出还检查每个订单恰好一次、同机不重叠、开始/完工时间相接，以及所有指标重新求和。8组检查同时包含极值、非法输入和JSON复现。</p>
+<p>还有一个反例专门保留在测试中：基线加权完工时间89、总工期7；优化后分别为78和9。降低加权完工时间，并不保证更早全部结束。</p>
+<h2>你可以动手做的三个变化</h2>
+<ol><li>把F的权重改成10，观察它的机器与完工时间。</li><li>调整输入顺序，看看基线有没有变化；精确最优目标应保持一致。</li><li>把所有工时和权重改成一样，观察多种安排怎样达到相同目标。</li></ol>
+<p>页面支持导出完整订单与结果。用仓库的<code>node scripts/solve.mjs scheduling-experiment.json</code>重新计算，可以保留一次实验的输入和结论。</p>
+<h2>哪些条件一变，就要重新建模？</h2>
+<p>所有订单同时可用，没有准备时间、切换耗时、设备故障、订单依赖和中断加工。加入交期、不同到达时间或顺序相关的准备时间后，这个排序证明和算法不一定适用。</p>
+<p>本例使用新造合成数据，选题来自工程优化的调度问题结构；不公开课程原题或答案，也不承接已有课程结果。开发、文档与检查由AI辅助，自动检查不等同本人独立开发或真人实验。</p>
+<div class="cta-group"><a class="btn-play" href="../../engineering-optimization-examples/">动手改一次安排 →</a><a class="btn-play secondary" href="https://github.com/TH0RGOODMAN/engineering-optimization-examples/blob/main/docs/model.md">查看模型与验证 ↗</a></div></article><aside class="article-end"><strong>把阅读变成一次动手尝试。</strong><p>选一个参数改一改，再用自己的话解释结果。笔记与源码一起维护，验证范围以对应项目文档为准。</p><a href="../">← 继续读其他笔记</a></aside></main><footer class="play-footer"><span>hea1 · 好奇心与小实验</span><div class="play-footer-links"><a href="../../">返回小站</a><a href="../../feed.xml">Atom 订阅</a><a href="../../LICENSE">MIT</a></div></footer></div></body></html>
