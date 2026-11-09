@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>位置对了，为什么还是装不上？ · hea1</title><meta name="description" content="把顺序、位置和姿态分开，三维交互里的反馈才有解释力。"><meta name="theme-color" content="#fcf9f2"><link rel="canonical" href="https://hea1.org/notes/assembly-rules/"><link rel="icon" href="../../favicon.svg" type="image/svg+xml"><meta property="og:type" content="article"><meta property="og:title" content="位置对了，为什么还是装不上？ · hea1"><meta property="og:description" content="把顺序、位置和姿态分开，三维交互里的反馈才有解释力。"><meta property="og:url" content="https://hea1.org/notes/assembly-rules/"><meta property="og:image" content="https://hea1.org/assets/share.png"><meta name="twitter:card" content="summary_large_image"><link rel="stylesheet" href="../../styles.css"><link rel="alternate" type="application/atom+xml" title="hea1 的实验笔记" href="../../feed.xml"></head>
+<body data-palette="warm"><a class="skip-link" href="#article">跳至正文</a><div class="canvas-wrap"><header class="play-header"><a href="../../" class="logo-pill">● ■ ◆ hea1</a><nav class="play-nav" aria-label="导航"><a href="../../#projects">作品</a><a href="../">笔记</a><a href="https://github.com/TH0RGOODMAN">GitHub ↗</a></nav></header><main class="article-shell" id="article"><div class="article-heading"><span class="greeting-sticker">交互 × 规则 · 实验笔记</span><h1>位置对了，为什么还是装不上？</h1><p class="article-lead">把顺序、位置和姿态分开，三维交互里的反馈才有解释力。</p><p class="article-meta"><time datetime="2026-11-09">2026 年 11 月 9 日</time> · hea1 · AI 辅助整理</p></div><article class="article-body">
+<p>在<a href="../../assembly-training-lab/">机械装配实验室</a>里，把转轴拖到正确位置，再按“确认装配”，也可能收到“工序不符合”的提示。画面看起来接近，规则却还没通过。</p>
+<p>这个小原型把一次装配分成三个可解释的问题：前面的工序完成了吗？零件离目标有多远？它的朝向差了多少？</p>
+<figure><img src="../../assets/assembly.jpg" width="1425" height="1054" loading="lazy" alt="五件装配的三维操作台与右侧步骤和偏差提示"><figcaption>实验台包含两个支架、一根转轴与两侧锁紧盖。</figcaption></figure>
+<h2>先检查顺序，再看空间</h2>
+<p>两个支架属于第一阶段，可以交换先后；转轴要等两个支架都装好；两侧锁紧盖都依赖转轴。规则记录的是依赖关系，不是一条必须逐项照抄的唯一顺序。</p>
+<pre><code>左支架 ─┐             ┌─ 左锁紧盖
+        ├─ 转轴完成 ──┤
+右支架 ─┘             └─ 右锁紧盖</code></pre>
+<p>“先装左支架”和“先装右支架”都可以成立。如果把同一阶段也写成唯一线性顺序，系统会把合理操作误判成错误。</p>
+<h2>位置和姿态各有一把尺子</h2>
+<p>位置误差是零件中心到目标中心的欧氏距离；姿态误差是相对目标旋转的角度。当前教学阈值是位置 55 毫米、角度 12°。两个条件都需要满足。</p>
+<p>这些数用于让桌面拖动容易完成，不是加工公差。系统不计算真实接触力、刚体碰撞或螺纹。拖到目标附近然后吸附，表达的是教学规则中的“允许放置”。</p>
+<h2>一次失败，应该有一个清楚的原因</h2>
+<p>判定先检查工序，再检查位置，最后检查姿态。多个条件同时不满足时，先报告当前最前面的阻碍；修正后再继续尝试。这让反馈可以对应一个实际动作。</p>
+<div class="article-table"><table><thead><tr><th>反馈</th><th>意味着什么</th><th>下一步</th></tr></thead><tbody><tr><td>工序错误</td><td>依赖零件还未完成</td><td>先装两个支架或转轴</td></tr><tr><td>位置偏差</td><td>离目标中心太远</td><td>平移或微调高度</td></tr><tr><td>姿态偏差</td><td>旋转角度未达要求</td><td>选择轴再转动零件</td></tr></tbody></table></div>
+<p>重复确认已安装零件、训练尚未开始、无效程序输入，也有各自处理。无效程序输入不会算作学习者错误并扣分。</p>
+<h2>把规则从画面里拆出来</h2>
+<p><a href="https://github.com/TH0RGOODMAN/assembly-training-lab/blob/main/domain.mjs">domain.mjs</a>处理工序、位姿误差、状态与计分。Three.js负责显示和交互。这样可以用合成位置与四元数直接检查边界，不用每次在三维画面里凭感觉拖动。</p>
+<p>当前公开版本有 29 项自动测试，发布时检查了训练、错误反馈、结果导出、重置、考核提示隐藏和历史清除。这些检查支持已列功能；没有真实头显、舒适度或学习效果实验。</p>
+<h2>试一次“有解释的失败”</h2>
+<ol><li>开始训练，先选转轴并尝试确认，观察工序反馈。</li><li>完成两个支架，再把转轴移近目标并改变朝向。</li><li>比较位置偏差与姿态偏差，逐项修正后确认装配。</li></ol>
+<p>一个可用的小实验，不只要让正确操作成功；错误操作也应该帮助使用者知道下一步能做什么。分数来自预设规则，不能视为现实技能认证。</p>
+<p>本项目由课程需求整理而来，开发、文档与测试使用了AI辅助。本人独立开发范围、真人学习效果与设备实测没有被自动测试替代。</p>
+<div class="cta-group"><a class="btn-play" href="../../assembly-training-lab/">试一次装配 →</a><a class="btn-play secondary" href="https://github.com/TH0RGOODMAN/assembly-training-lab/blob/main/docs/design.md">查看设计与验证 ↗</a></div></article><aside class="article-end"><strong>把阅读变成一次动手尝试。</strong><p>选一个参数改一改，再用自己的话解释结果。笔记与源码一起维护，验证范围以对应项目文档为准。</p><a href="../">← 继续读其他笔记</a></aside></main><footer class="play-footer"><span>hea1 · 好奇心与小实验</span><div class="play-footer-links"><a href="../../">返回小站</a><a href="../../feed.xml">Atom 订阅</a><a href="../../LICENSE">MIT</a></div></footer></div></body></html>

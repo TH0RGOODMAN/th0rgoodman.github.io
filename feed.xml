@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><id>https://hea1.org/notes/</id><title>hea1 的实验笔记</title><subtitle>建模、可视化与交互里的小问题。</subtitle><link href="https://hea1.org/feed.xml" rel="self"/><link href="https://hea1.org/notes/"/><updated>2026-11-09T06:00:00Z</updated><author><name>hea1</name></author>
+<entry><id>https://hea1.org/notes/shortest-and-risk/</id><title>最短的路，为什么可能要绕一绕？</title><link href="https://hea1.org/notes/shortest-and-risk/"/><updated>2026-11-09T06:00:00Z</updated><summary>用一张合成地图，把路径长度、风险代价和权重之间的取舍讲清楚。AI辅助整理。</summary></entry>
+<entry><id>https://hea1.org/notes/assembly-rules/</id><title>位置对了，为什么还是装不上？</title><link href="https://hea1.org/notes/assembly-rules/"/><updated>2026-11-09T06:00:00Z</updated><summary>把顺序、位置和姿态分开，三维交互里的反馈才有解释力。AI辅助整理。</summary></entry></feed>

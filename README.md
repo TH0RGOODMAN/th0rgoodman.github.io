@@ -2,7 +2,11 @@
 
 Personal homepage: **https://hea1.org/**
 
-The creator-style design uses warm paper, coral/cobalt/yellow geometric shapes, three arrangement states and three page palettes. It showcases the [Assembly Training Lab](https://hea1.org/assembly-training-lab/) and a short personal introduction under the public name **hea1**.
+The creator-style design uses warm paper, coral/cobalt/yellow geometric shapes, three arrangement states and three page palettes. Under the public name **hea1**, it connects two runnable experiments and design notes:
+
+- [Assembly Training Lab](https://hea1.org/assembly-training-lab/): sequence, position and orientation constraints in a 3D teaching prototype.
+- [Evacuation Pathfinding Lab](https://hea1.org/evacuation-pathfinding-lab/): shortest and risk-weighted A* on synthetic static grids, with editable maps and reproducible export.
+- [Experiment notes](https://hea1.org/notes/): explanations of the corresponding rules and tradeoffs.
 
 ## Files and maintenance
 
@@ -11,9 +15,14 @@ The creator-style design uses warm paper, coral/cobalt/yellow geometric shapes, 
 - `site.js`: arrangement and palette controls. State lives only in the current page.
 - `assets/assembly.jpg`: actual screenshot of the public assembly project; the original PNG is preserved.
 - `assets/share.png`: local, geometric social sharing artwork.
+- `assets/pathfinding.jpg`: actual browser screenshot of the pathfinding experiment.
+- `notes/`: index and two self-contained design notes; no client-side build or Markdown processing required.
+- `feed.xml`: Atom summaries for the notes. Update it and `sitemap.xml` when publishing a new note.
 - `404.html`, `robots.txt`, `sitemap.xml`: navigation and indexing support.
 
 No framework, package install or build step. Open `index.html` locally, or use any local static server. GitHub Pages publishes the root of `main`. The `CNAME` file binds `hea1.org`; preserve it when updating the page.
+
+Project demos use independent repositories and Pages deployments under the same domain. Their source is not copied into this repository. Keep URLs stable and verify the corresponding deployments before adding a project card.
 
 Before pushing, inspect desktop and mobile layouts, try all three palettes and arrangements, check keyboard focus and reduced motion, and verify local images and navigation. With JavaScript unavailable, the content and default illustration remain readable; inactive controls are hidden.
 
