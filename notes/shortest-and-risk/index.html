@@ -1,28 +1,132 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>最短的路，为什么可能要绕一绕？ · hea1</title><meta name="description" content="用一张合成地图，把路径长度、风险代价和权重之间的取舍讲清楚。"><meta name="theme-color" content="#fcf9f2"><link rel="canonical" href="https://hea1.org/notes/shortest-and-risk/"><link rel="icon" href="../../favicon.svg" type="image/svg+xml"><meta property="og:type" content="article"><meta property="og:title" content="最短的路，为什么可能要绕一绕？ · hea1"><meta property="og:description" content="用一张合成地图，把路径长度、风险代价和权重之间的取舍讲清楚。"><meta property="og:url" content="https://hea1.org/notes/shortest-and-risk/"><meta property="og:image" content="https://hea1.org/assets/share.png"><meta name="twitter:card" content="summary_large_image"><link rel="stylesheet" href="../../styles.css"><link rel="alternate" type="application/atom+xml" title="hea1 的实验笔记" href="../../feed.xml"></head>
-<body data-palette="warm"><a class="skip-link" href="#article">跳至正文</a><div class="canvas-wrap"><header class="play-header"><a href="../../" class="logo-pill">● ■ ◆ hea1</a><nav class="play-nav" aria-label="导航"><a href="../../#projects">作品</a><a href="../">笔记</a><a href="https://github.com/TH0RGOODMAN">GitHub ↗</a></nav></header><main class="article-shell" id="article"><div class="article-heading"><span class="greeting-sticker">建模 × 寻路 · 实验笔记</span><h1>最短的路，为什么可能要绕一绕？</h1><p class="article-lead">用一张合成地图，把路径长度、风险代价和权重之间的取舍讲清楚。</p><p class="article-meta"><time datetime="2026-11-09">2026 年 11 月 9 日</time> · hea1 · AI 辅助整理</p></div><article class="article-body">
-<p>一条路线走 15 格，另一条走 19 格。只看长度，前者更好；如果前者穿过一片风险区，这个选择就多了一个条件：你愿意为减少风险，多走多少路？</p>
-<p><a href="../../evacuation-pathfinding-lab/">寻路与风险实验室</a>把这个问题缩成一张小地图。两条路线使用相同的起点、出口和障碍，你可以调整权重，看到选择怎样变化。</p>
-<figure><img src="../../assets/pathfinding.jpg" width="1280" height="1000" loading="lazy" alt="实际实验台：蓝色虚线穿过黄色风险区，红色实线从上方绕开"><figcaption>“风险穿越”预设的实际浏览器截图；λ = 2。</figcaption></figure>
-<h2>先把“更好”写成一个目标</h2>
-<p>我们只允许上下左右移动，每走一步计 1。给每个可通行格子一个非负的合成风险值，进入这个格子时把它加入累计风险。总代价定义为：</p>
-<pre><code>C = L + λ × R
-L：步数（格）
-R：进入格点的风险值之和（不计起点）
-λ：风险权重</code></pre>
-<p>λ = 0 时，目标就是最短路。λ 越大，每单位风险带来的惩罚越高。它是这次实验里人为设定的取舍，没有经过真实风险校准。</p>
-<h2>把两条路线放在同一个尺子上</h2>
-<p>默认场景中，蓝色最短路走 15 格，累计风险 32；λ = 2 的红色路线走 19 格，累计风险 0。按同一个 λ = 2 重新评价，两条路线的代价分别是：</p>
-<div class="article-table"><table><thead><tr><th>路线</th><th>长度</th><th>累计风险</th><th>λ = 2 时的代价</th></tr></thead><tbody><tr><td>最短路线</td><td>15</td><td>32</td><td>15 + 2 × 32 = 79</td></tr><tr><td>加权路线</td><td>19</td><td>0</td><td>19 + 2 × 0 = 19</td></tr></tbody></table></div>
-<p>多走 4 格换来累计风险少 32，在这个权重下，绕行更合算。这组数只对应本仓库的固定合成场景。界面两张卡片各自按本方案的 λ 展示代价；跨路线比较时，需要统一权重。</p>
-<p>提高 λ 不一定立即改变路线：许多权重可能对应同一条最优路线。同样，红线仍可能经过风险区，比如所有出口都在风险区后面，或绕行代价太高。</p>
-<h2>为什么 A* 还适用？</h2>
-<p>两种方案都采用 A*。我们给每条边的代价加上风险项，并使用到目标的曼哈顿距离作启发函数。因为每步代价至少为 1，曼哈顿距离不会高估剩余代价。</p>
-<p>实现把算法与界面拆开：<a href="https://github.com/TH0RGOODMAN/evacuation-pathfinding-lab/blob/main/pathfinding.mjs">pathfinding.mjs</a>只接收地图和权重，返回路线与指标。测试用独立 Bellman–Ford 算法核对了 100 张固定种子随机地图、每张 4 种权重的最优代价，并检查路径连续性、障碍、起终点、无路和导出复现。</p>
-<h2>你可以试的三个变化</h2>
-<ol><li>把权重调到 0：两条线应完全一致。</li><li>给绕行通道也加上风险：观察红线什么时候换路。</li><li>画一堵贯穿地图的墙：页面应明确告诉你没有路线，而不是给出看似漂亮的成绩。</li></ol>
-<p>需要保留一次实验时，导出 JSON；文件包含地图、权重和两条路径，可以调用纯模块重新计算。</p>
-<h2>这张地图的解释范围</h2>
-<p>这里没有烟气、火势传播、暴露时间、人群拥堵、多楼层或出口容量。风险是无量纲合成惩罚，长度单位是格；模型不能指导现实火灾或人员疏散。它适合解释目标函数如何改变算法的选择。</p>
-<p>这是本轮 AI 辅助新实现的教学版本，没有恢复旧论文，也不继承旧论文的改善百分比。验证覆盖自动算法检查和特定浏览器交互，不包含真人学习实验。</p>
-<div class="cta-group"><a class="btn-play" href="../../evacuation-pathfinding-lab/">动手改一张地图 →</a><a class="btn-play secondary" href="https://github.com/TH0RGOODMAN/evacuation-pathfinding-lab/blob/main/docs/model.md">查看模型与验证 ↗</a></div></article><aside class="article-end"><strong>把阅读变成一次动手尝试。</strong><p>选一个参数改一改，再用自己的话解释结果。笔记与源码一起维护，验证范围以对应项目文档为准。</p><a href="../">← 继续读其他笔记</a></aside></main><footer class="play-footer"><span>hea1 · 好奇心与小实验</span><div class="play-footer-links"><a href="../../">返回小站</a><a href="../../feed.xml">Atom 订阅</a><a href="../../LICENSE">MIT</a></div></footer></div></body></html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>最短的路，为什么可能要绕一绕？ · hea1</title>
+  <meta name="description" content="用一张合成地图，把路径长度、风险代价和权重之间的取舍讲清楚。">
+  <meta name="theme-color" content="#fcf9f2">
+  <link rel="canonical" href="https://hea1.org/notes/shortest-and-risk/">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="最短的路，为什么可能要绕一绕？ · hea1">
+  <meta property="og:description" content="用一张合成地图，把路径长度、风险代价和权重之间的取舍讲清楚。">
+  <meta property="og:url" content="https://hea1.org/notes/shortest-and-risk/">
+  <meta property="og:image" content="https://hea1.org/assets/share.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="alternate" type="application/atom+xml" title="hea1 的实验笔记" href="../../feed.xml">
+</head>
+<body data-palette="warm">
+  <a class="skip-link" href="#article">跳至正文</a>
+  <div class="canvas-wrap">
+    <header class="play-header">
+      <a href="../../" class="logo-pill" aria-label="返回 hea1 首页">
+        <span class="logo-shapes" aria-hidden="true">
+          <span class="shape-dot"></span>
+          <span class="shape-sq"></span>
+          <span class="shape-tri"></span>
+        </span>
+        <span>hea1</span>
+      </a>
+      <div class="header-right">
+        <nav class="play-nav" aria-label="主导航">
+          <a href="../../#projects">作品</a>
+          <a href="../" aria-current="page">笔记</a>
+          <a href="../../#about">关于</a>
+          <a href="https://github.com/TH0RGOODMAN" rel="noopener">GitHub ↗</a>
+        </nav>
+        <div class="mini-palette-bar" role="group" aria-label="页面配色切换" hidden>
+          <button type="button" class="mini-swatch-btn" data-theme="warm" aria-pressed="true" aria-label="暖阳配色" title="暖阳配色"><span class="mini-swatch-dot mini-swatch-dot--warm" aria-hidden="true"></span></button>
+          <button type="button" class="mini-swatch-btn" data-theme="blueprint" aria-pressed="false" aria-label="蓝图配色" title="蓝图配色"><span class="mini-swatch-dot mini-swatch-dot--blueprint" aria-hidden="true"></span></button>
+          <button type="button" class="mini-swatch-btn" data-theme="terracotta" aria-pressed="false" aria-label="陶土配色" title="陶土配色"><span class="mini-swatch-dot mini-swatch-dot--terracotta" aria-hidden="true"></span></button>
+        </div>
+      </div>
+    </header>
+
+    <main class="article-shell" id="article">
+      <div class="article-heading">
+        <nav class="breadcrumb" aria-label="面包屑导航">
+          <a href="../../">首页</a>
+          <span aria-hidden="true">/</span>
+          <a href="../">实验笔记</a>
+          <span aria-hidden="true">/</span>
+          <span>建模 × 寻路</span>
+        </nav>
+        <span class="greeting-sticker"><span class="sticker-spark" aria-hidden="true"></span>建模 × 寻路 · 实验笔记</span>
+        <h1>最短的路，为什么可能要绕一绕？</h1>
+        <p class="article-lead">用一张合成地图，把路径长度、风险代价和权重之间的取舍讲清楚。</p>
+        <div class="article-meta-bar">
+          <p class="article-meta"><time datetime="2026-11-09">2026 年 11 月 9 日</time> · hea1 · AI 辅助整理</p>
+          <a class="article-lab-pill" href="../../evacuation-pathfinding-lab/">打开寻路与风险实验室 ↗</a>
+        </div>
+      </div>
+
+      <article class="article-body">
+        <p>一条路线走 15 格，另一条走 19 格。只看步数，前者更短；但如果前者横穿一片高风险区，问题就多了一层权衡：为了降低风险，你愿意多走几步？</p>
+        <p><a href="../../evacuation-pathfinding-lab/">寻路与风险实验室</a>把这个问题放进一张可编辑的小网格里：同一起点、同一出口、同一批障碍，拨动风险权重即可观察路线何时改道。</p>
+        <figure>
+          <img src="../../assets/pathfinding.jpg" width="1280" height="1000" loading="lazy" alt="实际实验台：蓝色虚线穿过黄色风险区，红色实线从上方绕开">
+          <figcaption>“风险穿越”预设的实际浏览器画面（λ = 2）：蓝线直穿风险区，红线从上方绕行。</figcaption>
+        </figure>
+        <h2>先把“更好”写成一个明确目标</h2>
+        <p>网格仅允许上下左右四邻域移动，每走一步长度计 1。每个可通行格子带有非负合成风险值，进入该格时累加风险。总代价定义为：</p>
+        <pre><code>C = L + λ × R
+L：路径步数（格）
+R：沿途进入格点的风险值之和（不含起点）
+λ：风险权重（非负实数）</code></pre>
+        <p>当 <code>λ = 0</code> 时，目标退化为纯最短路；<code>λ</code> 越大，单位风险惩罚越重。这里的 <code>λ</code> 是人为设定的偏好旋钮，未经真实灾害数据标定。</p>
+        <h2>把两条路线放在同一把尺子上</h2>
+        <p>在默认场景中，蓝色最短路走 15 格、累计风险 32；<code>λ = 2</code> 时的红色路线走 19 格、累计风险 0。若统一用 <code>λ = 2</code> 的目标函数衡量两条路线：</p>
+        <div class="article-table">
+          <table>
+            <thead><tr><th>候选路线</th><th>步数 L</th><th>累计风险 R</th><th>按 λ = 2 计算的总代价</th></tr></thead>
+            <tbody>
+              <tr><td>最短直穿路线</td><td>15</td><td>32</td><td>15 + 2 × 32 = 79</td></tr>
+              <tr><td>风险加权路线</td><td>19</td><td>0</td><td>19 + 2 × 0 = 19</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>多走 4 格换来减少 32 点累计风险，在当前权重下绕行明显更优。需要注意的是，微调 <code>λ</code> 未必每次都触发换路——一整段权重区间可能共享同一条最优折线；若所有出口都被风险区包围，加权路线也仍会穿过风险较低的通道。</p>
+        <h2>为什么曼哈顿启发对加权图依然可采纳？</h2>
+        <p>两条路线均由 A* 搜索求解。由于每走一步的基础步长代价为 1，且附加风险项非负，任意一步的实际边权都不小于 1；因此到终点的曼哈顿距离绝不会高估剩余真实代价，保证找到限定模型的全局最优路径。</p>
+        <p>算法模块 <a href="https://github.com/TH0RGOODMAN/evacuation-pathfinding-lab/blob/main/pathfinding.mjs" rel="noopener">pathfinding.mjs</a> 与 DOM 界面完全分离。自动测试使用独立实现的 Bellman–Ford 算法，对 100 张固定种子随机网格 × 4 组权重逐一核对了最优总代价，并覆盖路径连续性、端点保护、封路不可达与 JSON 导出重算。</p>
+        <h2>可以亲手试的三个变化</h2>
+        <ol>
+          <li>将权重 <code>λ</code> 拖到 0：红蓝两条路线应当完全重合。</li>
+          <li>用风险画笔在上方绕行走廊也涂几格风险：观察红线在什么阈值跳回中路或改走下路。</li>
+          <li>用障碍画笔把出口彻底围住：界面会明确反馈无路可达，而不是拼凑一条穿墙路线。</li>
+        </ol>
+        <h2>这张小地图的解释边界</h2>
+        <p>模型不包含烟气扩散、火势演化、暴露时长非线性累积、人群拥堵或多楼层出口容量，风险值仅为无量纲教学惩罚，不能用于指导现实建筑疏散。本仓库为 AI 辅助新编写的教学演示，不恢复或承接任何历史论文数据。</p>
+        <div class="cta-group">
+          <a class="btn-play" href="../../evacuation-pathfinding-lab/">动手改一张地图 →</a>
+          <a class="btn-play secondary" href="https://github.com/TH0RGOODMAN/evacuation-pathfinding-lab/blob/main/docs/model.md" rel="noopener">查看模型与验证文档 ↗</a>
+        </div>
+      </article>
+
+      <aside class="article-next-nav" aria-label="延伸阅读与实验">
+        <strong>把阅读变成一次动手尝试。</strong>
+        <p>去实验台改一个参数，再用自己的话解释结果变化。继续阅读另外两篇配对笔记：</p>
+        <div class="sibling-notes">
+          <a class="sibling-card" href="../scheduling-priorities/"><span>建模 × 调度</span><strong>谁先加工，为什么要看权重？ →</strong></a><a class="sibling-card" href="../assembly-rules/"><span>交互 × 规则</span><strong>位置对了，为什么还是装不上？ →</strong></a>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="play-footer">
+      <div>
+        <strong>hea1</strong> · 好奇心与小实验
+        <div class="license-note">© 2026 hea1 contributors · <a href="../../LICENSE">MIT License</a></div>
+      </div>
+      <div class="play-footer-links">
+        <a href="../../">返回首页</a>
+        <a href="../">全部笔记</a>
+        <a href="../../feed.xml">Atom 订阅</a>
+        <a href="https://github.com/TH0RGOODMAN" rel="noopener">GitHub</a>
+      </div>
+    </footer>
+  </div>
+  <script src="../../site.js" defer></script>
+</body>
+</html>

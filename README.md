@@ -2,35 +2,24 @@
 
 Personal homepage: **https://hea1.org/**
 
-The creator-style design uses warm paper, coral/cobalt/yellow geometric shapes, three arrangement states and three page palettes. Under the public name **hea1**, it connects three runnable experiments and design notes:
+A bright, tactile pegboard-style personal studio (`C-Edition` refined) built with plain HTML, CSS, SVG and vanilla JavaScript. Under the public handle **hea1**, it connects three runnable browser experiments and their companion design notes:
 
-- [Assembly Training Lab](https://hea1.org/assembly-training-lab/): sequence, position and orientation constraints in a 3D teaching prototype.
-- [Evacuation Pathfinding Lab](https://hea1.org/evacuation-pathfinding-lab/): shortest and risk-weighted A* on synthetic static grids, with editable maps and reproducible export.
-- [Engineering Optimization Examples](https://hea1.org/engineering-optimization-examples/): exact two-machine weighted completion scheduling with editable synthetic inputs and Gantt comparisons.
-- [Experiment notes](https://hea1.org/notes/): explanations of the corresponding rules and tradeoffs.
+- [Assembly Training Lab](https://hea1.org/assembly-training-lab/): sequence, position and orientation constraints in a 3D teaching prototype (`domain.mjs` pure rule separation + 29 automated checks).
+- [Evacuation Pathfinding Lab](https://hea1.org/evacuation-pathfinding-lab/): shortest vs. risk-weighted A* (`C = L + λ·R`) on editable synthetic grids, cross-checked against independent Bellman–Ford runs.
+- [Engineering Optimization Examples](https://hea1.org/engineering-optimization-examples/): exact two-machine weighted completion scheduling (`min Σ wᵢ·Cᵢ`, assignment enumeration + Smith ordering) with dual Gantt comparison.
+- [Experiment notes](https://hea1.org/notes/): concise problem statements, mathematical rules, verification methods and model boundaries for each experiment.
 
-## Files and maintenance
+## Highlights & Structure
 
-- `index.html`: homepage content and accessible SVG illustration.
-- `styles.css`: responsive layout, palettes and reduced-motion styles.
-- `site.js`: arrangement and palette controls. State lives only in the current page.
-- `assets/assembly.jpg`: actual screenshot of the public assembly project; the original PNG is preserved.
-- `assets/share.png`: local, geometric social sharing artwork.
-- `assets/pathfinding.jpg` and `assets/scheduling.jpg`: actual browser screenshots of the pathfinding and scheduling experiments.
-- `notes/`: index and three self-contained design notes; no client-side build or Markdown processing required.
-- `feed.xml`: Atom summaries for the notes. Update it and `sitemap.xml` when publishing a new note.
-- `404.html`, `robots.txt`, `sitemap.xml`: navigation and indexing support.
+- `index.html`: asymmetric creator hero (`听说只要跳上风的背，就能飞走`), interactive 3-scene SVG pegboard (`积木装配` / `风险绕行` / `双机排程`), quick-jump workbench index, alternating studio window showcases, 3-column illustrated note cards, and studio habits / exploratory sketchbook.
+- `styles.css`: responsive pegboard design system (`warm`, `blueprint`, `terracotta` palettes), strict zero-overflow layout down to `320px`, visible keyboard focus and `prefers-reduced-motion` support.
+- `site.js`: progressive-enhancement interactive pegboard & palette switcher. All state stays strictly in the current page memory (zero cookies, local storage or network requests). Without JavaScript, the default geometric assembly illustration and all page content remain cleanly readable.
+- `notes/`: notes index and three self-contained companion articles with geometric header motifs, breadcrumbs, direct experiment links and cross-note navigation.
+- `assets/`: actual browser screenshots (`assembly.jpg`, `pathfinding.jpg`, `scheduling.jpg`, original `assembly.png`) and `1200×630` social card `share.png`.
+- `404.html`, `feed.xml`, `robots.txt`, `sitemap.xml`, `CNAME`: static routing, Atom feed and domain configuration (`hea1.org`).
 
-No framework, package install or build step. Open `index.html` locally, or use any local static server. GitHub Pages publishes the root of `main`. The `CNAME` file binds `hea1.org`; preserve it when updating the page.
+## Privacy & Provenance
 
-Project demos use independent repositories and Pages deployments under the same domain. Their source is not copied into this repository. Keep URLs stable and verify the corresponding deployments before adding a project card.
+This repository contains no portraits, real name, school, employer, contact form, email address, phone number, location or analytics scripts. Public GitHub links reference the public account `TH0RGOODMAN`; this is not an anonymity guarantee.
 
-Before pushing, inspect desktop and mobile layouts, try all three palettes and arrangements, check keyboard focus and reduced motion, and verify local images and navigation. With JavaScript unavailable, the content and default illustration remain readable; inactive controls are hidden.
-
-## Privacy and provenance
-
-The homepage contains no portraits, real name, school, employer, contact form, email address or location. Existing GitHub links identify the public account; this is not an anonymity claim. No application analytics, cookies, local storage, remote fonts or network requests are added. The hosting provider may keep standard access logs.
-
-The selected visual concept was created with Gemini 4 Argon. Codex assisted with implementation, production refinements and verification. The site owner selected this direction. Illustration assets are geometric drawings; the project screenshot is from the public application. Project development and verification limits are documented in its own repository.
-
-MIT license. No private background, raw prompts, account configuration or credentials belong in this repository.
+Visual design and front-end refinement were assisted by Gemini, with engineering and verification tooling assisted by Codex. Each experiment repository documents its own synthetic model assumptions and testing scope. Released under the [MIT License](./LICENSE).

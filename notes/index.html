@@ -1,1 +1,134 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>实验笔记 · hea1</title><meta name="description" content="围绕实际作品，记录一个问题、一条规则和一次可复现的小实验。"><link rel="canonical" href="https://hea1.org/notes/"><link rel="icon" href="../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../styles.css"><link rel="alternate" type="application/atom+xml" title="hea1 的实验笔记" href="../feed.xml"></head><body data-palette="warm"><a class="skip-link" href="#main">跳至主要内容</a><div class="canvas-wrap"><header class="play-header"><a class="logo-pill" href="../">● ■ ◆ hea1</a><nav class="play-nav" aria-label="导航"><a href="../#projects">作品</a><a href="../#about">关于</a><a href="https://github.com/TH0RGOODMAN">GitHub ↗</a></nav></header><main id="main"><section class="notes-intro"><span class="greeting-sticker">NOTES FROM THE WORKBENCH</span><h1>做了什么，<br>也讲讲为什么。</h1><p>每篇围绕一个实际作品：把问题说清楚，把规则写明白，再留一个可以动手尝试的入口。</p></section><div class="notes-grid"><a class="note-card" href="./scheduling-priorities/"><span class="note-topic">建模 × 调度 · 2026.11.09</span><h2>谁先加工，为什么要看权重？</h2><p>工时、优先权重和完工时间，怎样改变订单的安排。</p><span class="note-arrow">读笔记 →</span></a><a class="note-card" href="./shortest-and-risk/"><span class="note-topic">建模 × 寻路 · 2026.11.09</span><h2>最短的路，为什么可能要绕一绕？</h2><p>用同一张地图，把长度、风险和权重的取舍讲清楚。</p><span class="note-arrow">读笔记 →</span></a><a class="note-card" href="./assembly-rules/"><span class="note-topic">交互 × 规则 · 2026.11.09</span><h2>位置对了，为什么还是装不上？</h2><p>顺序、位置、姿态，分别需要怎样的反馈和验证。</p><span class="note-arrow">读笔记 →</span></a></div><p class="notes-provenance">笔记由 AI 辅助整理，以实际实现与工具验证为依据。具体来源与实验限制见正文和仓库。</p></main><footer class="play-footer"><span>hea1 · 好奇心与小实验</span><div class="play-footer-links"><a href="../">返回小站</a><a href="../feed.xml">Atom 订阅</a><a href="../LICENSE">MIT</a></div></footer></div></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>实验笔记 · hea1</title>
+  <meta name="description" content="围绕 hea1.org 的实际可运行作品，记录一个具体问题、一条核心规则与一次可复现的小实验。">
+  <meta name="theme-color" content="#fcf9f2">
+  <link rel="canonical" href="https://hea1.org/notes/">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="实验笔记 · hea1">
+  <meta property="og:description" content="围绕实际作品，记录一个问题、一条规则和一次可复现的小实验。">
+  <meta property="og:url" content="https://hea1.org/notes/">
+  <meta property="og:image" content="https://hea1.org/assets/share.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="alternate" type="application/atom+xml" title="hea1 的实验笔记" href="../feed.xml">
+</head>
+<body data-palette="warm">
+  <a class="skip-link" href="#main">跳至主要内容</a>
+  <div class="canvas-wrap">
+    <header class="play-header">
+      <a href="../" class="logo-pill" aria-label="返回 hea1 首页">
+        <span class="logo-shapes" aria-hidden="true">
+          <span class="shape-dot"></span>
+          <span class="shape-sq"></span>
+          <span class="shape-tri"></span>
+        </span>
+        <span>hea1</span>
+      </a>
+      <div class="header-right">
+        <nav class="play-nav" aria-label="主导航">
+          <a href="../#projects">作品</a>
+          <a href="./" aria-current="page">笔记</a>
+          <a href="../#about">关于</a>
+          <a href="https://github.com/TH0RGOODMAN" rel="noopener">GitHub ↗</a>
+        </nav>
+        <div class="mini-palette-bar" role="group" aria-label="页面配色切换" hidden>
+          <button type="button" class="mini-swatch-btn" data-theme="warm" aria-pressed="true" aria-label="暖阳配色" title="暖阳配色"><span class="mini-swatch-dot mini-swatch-dot--warm" aria-hidden="true"></span></button>
+          <button type="button" class="mini-swatch-btn" data-theme="blueprint" aria-pressed="false" aria-label="蓝图配色" title="蓝图配色"><span class="mini-swatch-dot mini-swatch-dot--blueprint" aria-hidden="true"></span></button>
+          <button type="button" class="mini-swatch-btn" data-theme="terracotta" aria-pressed="false" aria-label="陶土配色" title="陶土配色"><span class="mini-swatch-dot mini-swatch-dot--terracotta" aria-hidden="true"></span></button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="notes-intro">
+        <span class="greeting-sticker"><span class="sticker-spark" aria-hidden="true"></span>NOTES FROM THE WORKBENCH</span>
+        <h1>做了什么，<br>也讲讲为什么。</h1>
+        <p>每篇笔记都配对一件可在线操作的实验台：先把问题缩成一个清楚的目标式，再把判定规则、独立对账方式和模型适用边界摊开写明。</p>
+      </section>
+
+      <div class="notes-grid">
+          <a class="note-card" href="./scheduling-priorities/">
+            <div class="note-motif" aria-hidden="true">
+              <svg viewBox="0 0 68 36">
+                <rect x="2" y="5" width="20" height="11" rx="3" fill="var(--coral)" stroke="var(--border)" stroke-width="1.8"/>
+                <rect x="25" y="5" width="38" height="11" rx="3" fill="var(--sun)" stroke="var(--border)" stroke-width="1.8"/>
+                <rect x="2" y="20" width="18" height="11" rx="3" fill="var(--teal)" stroke="var(--border)" stroke-width="1.8"/>
+                <rect x="23" y="20" width="28" height="11" rx="3" fill="var(--cobalt)" stroke="var(--border)" stroke-width="1.8"/>
+              </svg>
+              <span class="note-formula">min Σ wᵢ·Cᵢ</span>
+            </div>
+            <span class="note-topic">建模 × 调度 · 2026.11.09</span>
+            <h3>谁先加工，为什么要看权重？</h3>
+            <p>工时、优先权重和完工时间怎样一起改变订单先后，为什么降低加权完工总和未必缩短总工期。</p>
+            <div class="note-foot">
+              <span class="note-arrow">读笔记 →</span>
+              <span class="note-pair">配对 #03</span>
+            </div>
+          </a>
+
+          <a class="note-card" href="./shortest-and-risk/">
+            <div class="note-motif" aria-hidden="true">
+              <svg viewBox="0 0 68 36">
+                <rect x="22" y="13" width="24" height="11" rx="3" fill="var(--sun)" stroke="var(--border)" stroke-width="1.6"/>
+                <path d="M6 18 H62" stroke="var(--cobalt)" stroke-width="2" stroke-dasharray="3 3" fill="none"/>
+                <path d="M6 18 V6 H62 V18" stroke="var(--coral)" stroke-width="2.6" stroke-linejoin="round" fill="none"/>
+                <circle cx="6" cy="18" r="3.5" fill="var(--teal)" stroke="var(--border)" stroke-width="1.5"/>
+                <circle cx="62" cy="18" r="3.5" fill="var(--cobalt)" stroke="var(--border)" stroke-width="1.5"/>
+              </svg>
+              <span class="note-formula">C = L + λ·R</span>
+            </div>
+            <span class="note-topic">建模 × 寻路 · 2026.11.09</span>
+            <h3>最短的路，为什么可能要绕一绕？</h3>
+            <p>在同一张合成网格上对比最短路与加权绕行路，讲清步数、风险惩罚与启发式搜索的取舍边界。</p>
+            <div class="note-foot">
+              <span class="note-arrow">读笔记 →</span>
+              <span class="note-pair">配对 #02</span>
+            </div>
+          </a>
+
+          <a class="note-card" href="./assembly-rules/">
+            <div class="note-motif" aria-hidden="true">
+              <svg viewBox="0 0 68 36">
+                <path d="M10 21 H58 V31 H44 V25 H24 V31 H10 Z" fill="var(--cobalt)" stroke="var(--border)" stroke-width="1.8" stroke-linejoin="round"/>
+                <circle cx="34" cy="17" r="9" fill="var(--sun)" stroke="var(--border)" stroke-width="1.8"/>
+                <rect x="31.5" y="4" width="5" height="14" rx="2.5" fill="var(--coral)" stroke="var(--border)" stroke-width="1.6"/>
+              </svg>
+              <span class="note-formula">工序 · 55mm · 12°</span>
+            </div>
+            <span class="note-topic">交互 × 规则 · 2026.11.09</span>
+            <h3>位置对了，为什么还是装不上？</h3>
+            <p>把工序依赖、位置距离与旋转角度拆成三把独立的尺子，让每一次失败都能给出可执行的下一步。</p>
+            <div class="note-foot">
+              <span class="note-arrow">读笔记 →</span>
+              <span class="note-pair">配对 #01</span>
+            </div>
+          </a>
+        </div>
+
+      <div class="notes-guide-strip">
+        <p class="notes-provenance">笔记由 AI 辅助整理，全部数据与截图均对应已公开的合成教学模型与自动测试基准。具体源码与限制说明见各正文及仓库。</p>
+        <a class="btn-play ghost" href="../feed.xml">Atom 订阅更新 ↗</a>
+      </div>
+    </main>
+
+    <footer class="play-footer">
+      <div>
+        <strong>hea1</strong> · 好奇心与小实验
+        <div class="license-note">© 2026 hea1 contributors · <a href="../LICENSE">MIT License</a></div>
+      </div>
+      <div class="play-footer-links">
+        <a href="../">返回首页</a>
+        <a href="../#projects">全部作品</a>
+        <a href="../feed.xml">Atom 订阅</a>
+        <a href="https://github.com/TH0RGOODMAN" rel="noopener">GitHub</a>
+      </div>
+    </footer>
+  </div>
+  <script src="../site.js" defer></script>
+</body>
+</html>
