@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>hea1 · 好奇心与小实验</title>
-  <meta name="description" content="你好，我是 hea1。听说只要跳上风的背，就能飞走。把关于建模、可视化与交互的小问题，做成可以在浏览器里动手尝试的作品与笔记。">
+  <title>hea1 · AI 工具与好奇心小实验</title>
+  <meta name="description" content="你好，我是 hea1。听说只要跳上风的背，就能飞走。这里放着从实际需求出发、与 AI 一起做出的本地工具，以及关于建模、可视化与交互的浏览器小实验。">
   <link rel="canonical" href="https://hea1.org/">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <meta name="theme-color" content="#fcf9f2">
@@ -12,13 +12,13 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:site_name" content="hea1">
-  <meta property="og:title" content="hea1 · 好奇心与小实验">
-  <meta property="og:description" content="听说只要跳上风的背，就能飞走。关于建模、可视化与交互的个人主页与可运行小实验。">
+  <meta property="og:title" content="hea1 · AI 工具与好奇心小实验">
+  <meta property="og:description" content="听说只要跳上风的背，就能飞走。hea1 的个人主页：近期本地 AI 协作工具，以及建模、可视化与交互浏览器小实验。">
   <meta property="og:url" content="https://hea1.org/">
   <meta property="og:image" content="https://hea1.org/assets/share.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="hea1个人主页：听说只要跳上风的背，就能飞走，配彩色几何积木画板与三件实验作品">
+  <meta property="og:image:alt" content="hea1个人主页分享图：包含“听说只要跳上风的背，就能飞走”标题、彩色几何积木画板与三件浏览器实验画板">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="./styles.css">
   <link rel="alternate" type="application/atom+xml" title="hea1 的实验笔记" href="./feed.xml">
@@ -38,7 +38,8 @@
       </a>
       <div class="header-right">
         <nav class="play-nav" aria-label="主导航">
-          <a href="#projects">作品</a>
+          <a href="#tools">工具</a>
+          <a href="#labs">实验</a>
           <a href="#notes">笔记</a>
           <a href="#about">关于</a>
           <a href="https://github.com/TH0RGOODMAN" rel="noopener">GitHub ↗</a>
@@ -55,24 +56,24 @@
             <span class="underline-wave">风的背</span>，就能飞走
           </h1>
           <p class="hero-lead">
-            欢迎来我的小站逛逛。我着迷于那些<strong>多一个条件、答案就会转弯</strong>的问题——把在<strong>建模、可视化、交互</strong>里学到的规则，拼成在浏览器里推一推、改一改就能看懂的小实验。
+            欢迎来我的小站。最近从自己的日常需求出发，和 AI 一起做了两个顺手的<strong>本地小工具</strong>；桌上也留着几个关于<strong>建模、可视化与交互</strong>的浏览器小实验，点开就能推一推、改一改。
           </p>
 
-          <div class="pillar-tags" aria-label="关注的三个方向">
+          <div class="pillar-tags" aria-label="主要关注方向">
             <span class="pillar-tag">
-              <span class="pillar-swatch" style="background: var(--coral);" aria-hidden="true"></span>建模 <small>规则与权衡</small>
+              <span class="pillar-swatch" style="background: var(--coral);" aria-hidden="true"></span>AI 协作工具 <small>本地与 MCP</small>
             </span>
             <span class="pillar-tag">
-              <span class="pillar-swatch" style="background: var(--cobalt);" aria-hidden="true"></span>可视化 <small>结构可见</small>
+              <span class="pillar-swatch" style="background: var(--cobalt);" aria-hidden="true"></span>建模与规则 <small>多条件权衡</small>
             </span>
             <span class="pillar-tag">
-              <span class="pillar-swatch" style="background: var(--sun);" aria-hidden="true"></span>交互 <small>改参数看变化</small>
+              <span class="pillar-swatch" style="background: var(--sun);" aria-hidden="true"></span>交互实验 <small>改参数看变化</small>
             </span>
           </div>
 
           <div class="cta-group">
-            <a class="btn-play" href="#projects">挑一个小实验来玩 →</a>
-            <a class="btn-play secondary" href="#notes">看看背后的想法</a>
+            <a class="btn-play" href="#tools">看近期 AI 工具 →</a>
+            <a class="btn-play secondary" href="#labs">玩浏览器小实验</a>
           </div>
         </div>
 
@@ -224,218 +225,358 @@
       <section id="projects" aria-labelledby="projects-title">
         <div class="section-heading">
           <div>
-            <span class="section-eyebrow">THE WORKBENCH · 已上线作品</span>
-            <h2 id="projects-title">三件可以动手玩的作品。</h2>
+            <span class="section-eyebrow">THE WORKBENCH · 工具与实验</span>
+            <h2 id="projects-title">一边解决手边的小麻烦，一边做可交互的模型。</h2>
           </div>
-          <p>每件都围绕一个具体冲突设计：顺序与位姿、最短与避险、个体权重与总工期。</p>
+          <p>近期新做了两件 Windows 本地 AI 协作工具；下方保留三件点开就能玩的纯静态浏览器实验。</p>
         </div>
 
-        <nav class="workbench-strip" aria-label="作品快速索引">
-          <a class="strip-card" href="#work-01">
-            <span class="strip-num strip-num--01">01</span>
-            <span class="strip-meta">
-              <strong>机械装配实验室</strong>
-              <span>工序依赖 × 空间位姿判定</span>
-            </span>
-          </a>
-          <a class="strip-card" href="#work-02">
-            <span class="strip-num strip-num--02">02</span>
-            <span class="strip-meta">
-              <strong>寻路与风险实验室</strong>
-              <span>路径步数 L × 风险惩罚 λR</span>
-            </span>
-          </a>
-          <a class="strip-card" href="#work-03">
-            <span class="strip-num strip-num--03">03</span>
-            <span class="strip-meta">
-              <strong>双机调度实验室</strong>
-              <span>直观派单 vs Smith 精确排序</span>
-            </span>
-          </a>
+        <nav class="workbench-index" aria-label="作品快速跳转">
+          <div class="index-cluster">
+            <span class="index-label">近期工具</span>
+            <a class="index-pill" href="#tool-01"><span class="index-code index-code--t1">T1</span>北航云盘 MCP</a>
+            <a class="index-pill" href="#tool-02"><span class="index-code index-code--t2">T2</span>FlClash Control</a>
+          </div>
+          <div class="index-cluster">
+            <span class="index-label">浏览器实验</span>
+            <a class="index-pill" href="#work-01"><span class="index-code index-code--01">01</span>机械装配</a>
+            <a class="index-pill" href="#work-02"><span class="index-code index-code--02">02</span>寻路风险</a>
+            <a class="index-pill" href="#work-03"><span class="index-code index-code--03">03</span>双机调度</a>
+          </div>
         </nav>
 
-        <article class="project-showcase" id="work-01">
-          <div class="project-copy">
-            <div class="project-meta-top">
-              <span class="badge-num">WORK #01</span>
-              <span class="badge-kind">三维交互 · 空间约束</span>
-              <span class="badge-kind">MIT · v0.1.0</span>
+        <section id="tools" class="tools-section" aria-labelledby="tools-heading">
+          <div class="subsection-head">
+            <div>
+              <span class="section-eyebrow">RECENT TOOLS · 近期工具</span>
+              <h3 id="tools-heading">围绕本地工作流做的两个 AI 协作工具</h3>
             </div>
-            <h3>机械装配实验室<span class="project-en">Assembly Training Lab</span></h3>
-            <p>
-              把五个零件摆进桌面浏览器：自由平移位置、旋转朝向，亲手试出“为什么位置看似贴上了，系统却提示还不能装”。
-            </p>
-            <p>
-              判定按<strong>前置工序 → 位置距离 → 旋转角度</strong>逐层检查，每次只报当前最先卡住的那一步，让错误反馈直接对应下一步动作。
-            </p>
-
-            <div class="spec-list" aria-label="作品一规格速览">
-              <div class="spec-row">
-                <span class="spec-key">能试什么</span>
-                <span class="spec-val">5 件支架/转轴/锁紧盖拖动旋转、训练与考核模式切换、JSON 成绩导出</span>
-              </div>
-              <div class="spec-row">
-                <span class="spec-key">核心标尺</span>
-                <span class="spec-val">有向无环工序依赖 + <code>55 mm</code> 位置阈值 + <code>12°</code> 姿态阈值</span>
-              </div>
-              <div class="spec-row">
-                <span class="spec-key">独立验证</span>
-                <span class="spec-val"><code>domain.mjs</code> 纯规则与 Three.js 画面解耦，含 29 项自动检查</span>
-              </div>
-            </div>
-
-            <div class="cta-group">
-              <a class="btn-play" href="./assembly-training-lab/">打开在线实验台 →</a>
-              <a class="btn-play secondary" href="./notes/assembly-rules/">读规则笔记 →</a>
-              <a class="btn-play ghost" href="https://github.com/TH0RGOODMAN/assembly-training-lab" rel="noopener">GitHub 源码 ↗</a>
-            </div>
-
-            <details class="honest-drawer">
-              <summary>使用提示与实验边界</summary>
-              <p>
-                AI 辅助开发的教学原型，推荐电脑浏览器体验。55 mm 为桌面操作吸附阈值而非机械加工公差；WebXR 为实验性入口，真实头显舒适度与学习效果尚未验证。<a href="./assembly-training-lab/about.html">查看完整说明与验证范围 ↗</a>
-              </p>
-            </details>
+            <p class="subsection-note">安装与运行前提各不相同，点开前请先看清对应说明。</p>
           </div>
 
-          <figure class="project-shot">
-            <div class="window-bar" aria-hidden="true">
-              <span class="window-dots"><i></i><i></i><i></i></span>
-              <span class="window-url">hea1.org/assembly-training-lab</span>
-            </div>
-            <div class="project-shot-body">
-              <a href="./assembly-training-lab/" aria-label="打开机械装配实验室在线演示">
-                <img src="./assets/assembly.jpg" width="1425" height="1054" loading="lazy" decoding="async" alt="机械装配实验室画面：包含支架、转轴、锁紧盖等五个零件的三维操作台与右侧步骤提示面板">
-              </a>
-            </div>
-            <figcaption>
-              <span>点击画面直接进入三维操作台</span>
-              <span>Three.js · 零后端纯静态</span>
-            </figcaption>
-          </figure>
-        </article>
-
-        <article class="project-showcase project-showcase--reverse route-project" id="work-02">
-          <div class="project-copy">
-            <div class="project-meta-top">
-              <span class="badge-num">WORK #02</span>
-              <span class="badge-kind">网格搜索 · 代价权衡</span>
-              <span class="badge-kind">MIT · v0.1.0</span>
-            </div>
-            <h3>寻路与风险实验室<span class="project-en">Evacuation Pathfinding Lab</span></h3>
-            <p>
-              最短的路，什么时候值得绕一绕？在同一张地图上拨动风险权重 λ，同屏对比最短直穿路线与避险绕行路线的步数和累计风险。
-            </p>
-            <p>
-              你可以自己画墙、涂改风险区、挪动起点与出口；画出一道封死出口的墙时，系统会诚实提示无路可达，并支持导出完整 JSON 复现。
-            </p>
-
-            <div class="spec-list" aria-label="作品二规格速览">
-              <div class="spec-row">
-                <span class="spec-key">能试什么</span>
-                <span class="spec-val">3 张合成预设、障碍/风险画笔、起终点挪动、手机放大画板与 JSON 导出</span>
+          <div class="tools-grid">
+            <article class="tool-card" id="tool-01">
+              <div class="project-meta-top">
+                <span class="badge-num badge-num--tool-drive">TOOL #01</span>
+                <span class="badge-kind">Windows Alpha · Python ≥3.12</span>
+                <span class="badge-kind">MIT</span>
               </div>
-              <div class="spec-row">
-                <span class="spec-key">核心标尺</span>
-                <span class="spec-val"><code>C = L + λ·R</code>（默认场景 15 格/32 风险 vs 19 格/0 风险）</span>
-              </div>
-              <div class="spec-row">
-                <span class="spec-key">独立验证</span>
-                <span class="spec-val">A* 纯模块对 100 张随机网格 × 4 组权重做独立 Bellman–Ford 最优代价对账</span>
-              </div>
-            </div>
+              <h4>北航云盘 MCP / CLI<span class="project-en">buaa-drive-local-mcp</span></h4>
 
-            <div class="cta-group">
-              <a class="btn-play" href="./evacuation-pathfinding-lab/">去地图上试一试 →</a>
-              <a class="btn-play secondary" href="./notes/shortest-and-risk/">读模型笔记 →</a>
-              <a class="btn-play ghost" href="https://github.com/TH0RGOODMAN/evacuation-pathfinding-lab" rel="noopener">GitHub 源码 ↗</a>
-            </div>
+              <figure class="tool-diagram">
+                <svg viewBox="0 0 320 112" role="img" aria-labelledby="diag-drive-title diag-drive-desc">
+                  <title id="diag-drive-title">北航云盘 MCP / CLI 工作方式示意</title>
+                  <desc id="diag-drive-desc">本地同步目录中的文本文件通过 MCP 或 CLI 提供的 7 项操作与 AI 客户端连接。</desc>
+                  <g fill="#c5bda9">
+                    <circle cx="20" cy="18" r="2.2"/><circle cx="160" cy="18" r="2.2"/><circle cx="300" cy="18" r="2.2"/>
+                    <circle cx="20" cy="76" r="2.2"/><circle cx="300" cy="76" r="2.2"/>
+                  </g>
+                  <!-- Connector Line -->
+                  <line x1="78" y1="46" x2="242" y2="46" class="diag-stroke" stroke-width="2.5" stroke-dasharray="5 4"/>
+                  <!-- Left: Paper Sheets Symbol -->
+                  <rect x="42" y="24" width="38" height="46" rx="6" class="diag-soft diag-stroke" stroke-width="2"/>
+                  <path d="M34 18 H58 L68 28 V64 H34 Z" class="diag-card diag-stroke" stroke-width="2.4" stroke-linejoin="round"/>
+                  <path d="M58 18 V28 H68" fill="none" class="diag-stroke" stroke-width="2" stroke-linejoin="round"/>
+                  <line x1="42" y1="38" x2="58" y2="38" class="diag-stroke" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="42" y1="47" x2="60" y2="47" class="diag-stroke" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="67" cy="59" r="7" class="diag-sun diag-stroke" stroke-width="2"/>
+                  <text x="53" y="96" text-anchor="middle" class="diag-label">同步文件</text>
 
-            <details class="honest-drawer">
-              <summary>模型与实验边界</summary>
+                  <!-- Center: Plug / Bridge Pill -->
+                  <rect x="112" y="39" width="96" height="14" rx="4" class="diag-paper diag-stroke" stroke-width="2"/>
+                  <rect x="122" y="25" width="76" height="42" rx="21" class="diag-teal diag-stroke" stroke-width="2.5"/>
+                  <text x="160" y="51" text-anchor="middle" class="diag-label-light">MCP</text>
+
+                  <!-- Right: AI Spark Node -->
+                  <circle cx="264" cy="46" r="23" class="diag-cobalt diag-stroke" stroke-width="2.5"/>
+                  <path d="M264 33 L268 42 L277 46 L268 50 L264 59 L260 50 L251 46 L260 42 Z" class="diag-sun diag-stroke" stroke-width="1.8" stroke-linejoin="round"/>
+                  <text x="264" y="96" text-anchor="middle" class="diag-label">AI 客户端</text>
+                </svg>
+                <figcaption>工作方式示意 · 同步文件 ↔ MCP / CLI ↔ AI</figcaption>
+              </figure>
+
               <p>
-                AI 辅助新实现的静态网格教学示例，风险值为无量纲合成惩罚，不含烟气扩散、人群拥堵或多楼层机制；不复现旧论文结果，也不能指导现实疏散决策。<a href="./notes/shortest-and-risk/">阅读设计与验证说明 →</a>
+                想让支持 MCP 的 AI 在指定的北航云盘同步目录里查找、读取和更新笔记，又不想把整盘目录敞开，便做了这个轻量本地桥接。它提供目录/文件名查找、小文本读取、新建目录及文本更新与状态刷新等 7 项操作，支持 Markdown / TXT 与 SHA-256 冲突保护。
               </p>
-            </details>
+
+              <div class="tool-prereq" role="note">
+                <strong>使用前提：</strong>非官方 Windows Alpha；需已登录官方客户端和指定同步目录。
+              </div>
+
+              <div class="spec-list" aria-label="北航云盘 MCP / CLI 要点">
+                <div class="spec-row">
+                  <span class="spec-key">操作支持</span>
+                  <span class="spec-val">7 项 MCP / CLI 操作（查找、读取、新建目录、文本更新、状态与刷新）</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-key">当前进展</span>
+                  <span class="spec-val">已发布 Windows Alpha，并完成单个文件的双机往返验证</span>
+                </div>
+              </div>
+
+              <div class="cta-group">
+                <a class="btn-play" href="https://github.com/TH0RGOODMAN/buaa-drive-local-mcp/releases/tag/v0.1.0-alpha.1" rel="noopener">Alpha 下载与说明 ↗</a>
+                <a class="btn-play ghost" href="https://github.com/TH0RGOODMAN/buaa-drive-local-mcp" rel="noopener">GitHub 源码 ↗</a>
+              </div>
+            </article>
+
+            <article class="tool-card" id="tool-02">
+              <div class="project-meta-top">
+                <span class="badge-num badge-num--tool-flclash">TOOL #02</span>
+                <span class="badge-kind">Windows x64 · Python ≥3.11</span>
+                <span class="badge-kind">GPL-3.0-or-later</span>
+              </div>
+              <h4>FlClash Control<span class="project-en">flclash-control</span></h4>
+
+              <figure class="tool-diagram">
+                <svg viewBox="0 0 320 112" role="img" aria-labelledby="diag-flclash-title diag-flclash-desc">
+                  <title id="diag-flclash-title">FlClash Control 工作方式示意</title>
+                  <desc id="diag-flclash-desc">命令行和 stdio MCP 通过兼容版 FlClash 的控制桥同步并持久切换客户端状态。</desc>
+                  <g fill="#c5bda9">
+                    <circle cx="20" cy="18" r="2.2"/><circle cx="160" cy="18" r="2.2"/><circle cx="300" cy="18" r="2.2"/>
+                    <circle cx="20" cy="76" r="2.2"/><circle cx="300" cy="76" r="2.2"/>
+                  </g>
+                  <!-- Connector Line -->
+                  <line x1="78" y1="46" x2="242" y2="46" class="diag-stroke" stroke-width="2.5" stroke-dasharray="5 4"/>
+                  <!-- Left: Command Key Symbol -->
+                  <rect x="28" y="24" width="54" height="44" rx="11" class="diag-cobalt diag-stroke" stroke-width="2.5"/>
+                  <polyline points="42,38 51,46 42,54" fill="none" stroke="#ffffff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <line x1="55" y1="54" x2="67" y2="54" stroke="#ffffff" stroke-width="2.8" stroke-linecap="round"/>
+                  <text x="55" y="96" text-anchor="middle" class="diag-label">CLI / MCP</text>
+
+                  <!-- Center: Control Bridge Pill -->
+                  <rect x="112" y="39" width="96" height="14" rx="4" class="diag-paper diag-stroke" stroke-width="2"/>
+                  <rect x="120" y="25" width="80" height="42" rx="21" class="diag-coral diag-stroke" stroke-width="2.5"/>
+                  <text x="160" y="51" text-anchor="middle" class="diag-label-light">控制桥</text>
+
+                  <!-- Right: Toggle Switch Symbol -->
+                  <rect x="232" y="30" width="64" height="32" rx="16" class="diag-soft diag-stroke" stroke-width="2.5"/>
+                  <circle cx="247" cy="46" r="4" class="diag-teal"/>
+                  <circle cx="279" cy="46" r="12" class="diag-sun diag-stroke" stroke-width="2.4"/>
+                  <text x="264" y="96" text-anchor="middle" class="diag-label">客户端状态</text>
+                </svg>
+                <figcaption>工作方式示意 · 命令 ↔ 控制桥 ↔ 客户端状态</figcaption>
+              </figure>
+
+              <p>
+                切代理模式或查监听状态时总要切回窗口点几下，于是给运行中的 FlClash 接上了一套命令行和 9 项 stdio MCP 接口。无需模拟键鼠，即可查状态、启停监听、重连 Helper 并切换 TUN / 系统代理与路由模式，改动同步到界面并持久保存。
+              </p>
+
+              <div class="tool-prereq" role="note">
+                <strong>使用前提：</strong>实验性 Windows x64 / 0.8.93；需先构建安装带控制桥的兼容版，wheel 仅为控制端。
+              </div>
+
+              <div class="spec-list" aria-label="FlClash Control 要点">
+                <div class="spec-row">
+                  <span class="spec-key">控制能力</span>
+                  <span class="spec-val">命令行与 9 项 stdio MCP（状态、监听、Helper 重连、模式切换）</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-key">版本定位</span>
+                  <span class="spec-val">实验性 v0.1.0，随控制桥接改动遵循 GPL-3.0-or-later</span>
+                </div>
+              </div>
+
+              <div class="cta-group">
+                <a class="btn-play" href="https://github.com/TH0RGOODMAN/flclash-control/blob/main/docs/usage.md" rel="noopener">安装与构建说明 ↗</a>
+                <a class="btn-play ghost" href="https://github.com/TH0RGOODMAN/flclash-control" rel="noopener">GitHub 源码 ↗</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="labs" aria-labelledby="labs-heading">
+          <div class="subsection-head">
+            <div>
+              <span class="section-eyebrow">INTERACTIVE LABS · 浏览器交互实验</span>
+              <h3 id="labs-heading">三件打开浏览器就能玩的模型实验</h3>
+            </div>
+            <p class="subsection-note">围绕顺序与位姿、最短与避险、权重与总工期设计；纯静态运行，可导出参数复现。</p>
           </div>
 
-          <figure class="project-shot">
-            <div class="window-bar" aria-hidden="true">
-              <span class="window-dots"><i></i><i></i><i></i></span>
-              <span class="window-url">hea1.org/evacuation-pathfinding-lab</span>
-            </div>
-            <div class="project-shot-body">
-              <a href="./evacuation-pathfinding-lab/" aria-label="打开寻路与风险实验室">
-                <img src="./assets/pathfinding.jpg" width="1280" height="1000" loading="lazy" decoding="async" alt="寻路实验实际画面：蓝色虚线穿过风险区，红色实线绕行，右侧可调权重和编辑地图">
-              </a>
-            </div>
-            <figcaption>
-              <span>拨动 λ 滑杆，观察红蓝路线何时分叉</span>
-              <span>18 × 12 可编辑合成网格</span>
-            </figcaption>
-          </figure>
-        </article>
-
-        <article class="project-showcase scheduling-project" id="work-03">
-          <div class="project-copy">
-            <div class="project-meta-top">
-              <span class="badge-num">WORK #03</span>
-              <span class="badge-kind">组合优化 · 精确排程</span>
-              <span class="badge-kind">MIT · v0.1.0</span>
-            </div>
-            <h3>双机调度实验室<span class="project-en">Engineering Optimization Examples</span></h3>
-            <p>
-              同一批订单交给两台效率不同的机器，先做快的、先做急的，还是交给最先空闲的机器？改一改工时和优先权重，两张同刻度甘特图立刻给出对照。
-            </p>
-            <p>
-              页面同时展示加权完工总和 <code>ΣwC</code> 与总工期——你会直观看到：把重要订单排到前面能显著压低等待代价，但未必让全部订单更早收工。
-            </p>
-
-            <div class="spec-list" aria-label="作品三规格速览">
-              <div class="spec-row">
-                <span class="spec-key">能试什么</span>
-                <span class="spec-val">增删 1–8 个订单、编辑两机工时与权重、甘特图逐单对照与 CLI JSON 复算</span>
+          <article class="project-showcase" id="work-01">
+            <div class="project-copy">
+              <div class="project-meta-top">
+                <span class="badge-num">LAB #01</span>
+                <span class="badge-kind">三维交互 · 空间约束</span>
+                <span class="badge-kind">MIT · v0.1.0</span>
               </div>
-              <div class="spec-row">
-                <span class="spec-key">核心标尺</span>
-                <span class="spec-val">枚举双机分配 <code>2ⁿ</code> + 机内 Smith 邻接交换比值 <code>pᵢ / wᵢ</code></span>
-              </div>
-              <div class="spec-row">
-                <span class="spec-key">独立验证</span>
-                <span class="spec-val">60 组固定种子随机输入与不借用排序规则的全排列分割枚举基准完全一致</span>
-              </div>
-            </div>
-
-            <div class="cta-group">
-              <a class="btn-play" href="./engineering-optimization-examples/">安排一批订单 →</a>
-              <a class="btn-play secondary" href="./notes/scheduling-priorities/">读推导笔记 →</a>
-              <a class="btn-play ghost" href="https://github.com/TH0RGOODMAN/engineering-optimization-examples" rel="noopener">GitHub 源码 ↗</a>
-            </div>
-
-            <details class="honest-drawer">
-              <summary>模型与实验边界</summary>
+              <h4>机械装配实验室<span class="project-en">Assembly Training Lab</span></h4>
               <p>
-                AI 辅助构造的合成教学例子，不公开任何课程原题或答案。精确最优仅适用于两机、零时刻同时到达、无切换准备时间且不可中断的 <code>ΣwC</code> 目标，不代表工业生产排程表现。<a href="./notes/scheduling-priorities/">阅读推导与验证 →</a>
+                把五个零件摆进桌面浏览器：自由平移位置、旋转朝向，亲手试出“为什么位置看似贴上了，系统却提示还不能装”。
               </p>
-            </details>
-          </div>
+              <p>
+                判定按<strong>前置工序 → 位置距离 → 旋转角度</strong>逐层检查，每次只报当前最先卡住的那一步，让错误反馈直接对应下一步动作。
+              </p>
 
-          <figure class="project-shot">
-            <div class="window-bar" aria-hidden="true">
-              <span class="window-dots"><i></i><i></i><i></i></span>
-              <span class="window-url">hea1.org/engineering-optimization-examples</span>
+              <div class="spec-list" aria-label="作品一规格速览">
+                <div class="spec-row">
+                  <span class="spec-key">能试什么</span>
+                  <span class="spec-val">5 件支架/转轴/锁紧盖拖动旋转、训练与考核模式切换、JSON 成绩导出</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-key">核心标尺</span>
+                  <span class="spec-val">有向无环工序依赖 + <code>55 mm</code> 位置阈值 + <code>12°</code> 姿态阈值</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-key">独立验证</span>
+                  <span class="spec-val"><code>domain.mjs</code> 纯规则与 Three.js 画面解耦并附自动检查</span>
+                </div>
+              </div>
+
+              <div class="cta-group">
+                <a class="btn-play" href="./assembly-training-lab/">打开在线实验台 →</a>
+                <a class="btn-play secondary" href="./notes/assembly-rules/">读规则笔记 →</a>
+                <a class="btn-play ghost" href="https://github.com/TH0RGOODMAN/assembly-training-lab" rel="noopener">GitHub 源码 ↗</a>
+              </div>
+
+              <details class="honest-drawer">
+                <summary>使用提示与实验边界</summary>
+                <p>
+                  AI 辅助开发的教学原型，推荐电脑浏览器体验。55 mm 为桌面操作吸附阈值而非机械加工公差；WebXR 为实验性入口，真实头显舒适度与学习效果尚未验证。<a href="./assembly-training-lab/about.html">查看完整说明与验证范围 ↗</a>
+                </p>
+              </details>
             </div>
-            <div class="project-shot-body">
-              <a href="./engineering-optimization-examples/" aria-label="打开双机调度实验室">
-                <img src="./assets/scheduling.jpg" width="1280" height="1000" loading="lazy" decoding="async" alt="双机调度实际界面：订单工时与权重表，以及直观派单和精确最优方案的两张甘特图">
-              </a>
+
+            <figure class="project-shot">
+              <div class="window-bar" aria-hidden="true">
+                <span class="window-dots"><i></i><i></i><i></i></span>
+                <span class="window-url">hea1.org/assembly-training-lab</span>
+              </div>
+              <div class="project-shot-body">
+                <a href="./assembly-training-lab/" aria-label="打开机械装配实验室在线演示">
+                  <img src="./assets/assembly.jpg" width="1425" height="1054" loading="lazy" decoding="async" alt="机械装配实验室画面：包含支架、转轴、锁紧盖等五个零件的三维操作台与右侧步骤提示面板">
+                </a>
+              </div>
+              <figcaption>
+                <span>点击画面直接进入三维操作台</span>
+                <span>Three.js · 零后端纯静态</span>
+              </figcaption>
+            </figure>
+          </article>
+
+          <article class="project-showcase project-showcase--reverse route-project" id="work-02">
+            <div class="project-copy">
+              <div class="project-meta-top">
+                <span class="badge-num">LAB #02</span>
+                <span class="badge-kind">网格搜索 · 代价权衡</span>
+                <span class="badge-kind">MIT · v0.1.0</span>
+              </div>
+              <h4>寻路与风险实验室<span class="project-en">Evacuation Pathfinding Lab</span></h4>
+              <p>
+                最短的路，什么时候值得绕一绕？在同一张地图上拨动风险权重 λ，同屏对比最短直穿路线与避险绕行路线的步数和累计风险。
+              </p>
+              <p>
+                你可以自己画墙、涂改风险区、挪动起点与出口；画出一道封死出口的墙时，系统会诚实提示无路可达，并支持导出完整 JSON 复现。
+              </p>
+
+              <div class="spec-list" aria-label="作品二规格速览">
+                <div class="spec-row">
+                  <span class="spec-key">能试什么</span>
+                  <span class="spec-val">3 张合成预设、障碍/风险画笔、起终点挪动、手机放大画板与 JSON 导出</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-key">核心标尺</span>
+                  <span class="spec-val"><code>C = L + λ·R</code>（默认场景 15 格/32 风险 vs 19 格/0 风险）</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-key">独立验证</span>
+                  <span class="spec-val">A* 纯模块与独立 Bellman–Ford 在随机网格和权重上交叉对账</span>
+                </div>
+              </div>
+
+              <div class="cta-group">
+                <a class="btn-play" href="./evacuation-pathfinding-lab/">去地图上试一试 →</a>
+                <a class="btn-play secondary" href="./notes/shortest-and-risk/">读模型笔记 →</a>
+                <a class="btn-play ghost" href="https://github.com/TH0RGOODMAN/evacuation-pathfinding-lab" rel="noopener">GitHub 源码 ↗</a>
+              </div>
+
+              <details class="honest-drawer">
+                <summary>模型与实验边界</summary>
+                <p>
+                  AI 辅助实现的静态网格教学示例，风险值为无量纲合成惩罚，不含烟气扩散、人群拥堵或多楼层机制；不复现旧论文结果，也不能指导现实疏散决策。<a href="./notes/shortest-and-risk/">阅读设计与验证说明 →</a>
+                </p>
+              </details>
             </div>
-            <figcaption>
-              <span>把订单 F 权重调到 10，看它如何跳到队首</span>
-              <span>2 台机器 · 1–8 个合成订单</span>
-            </figcaption>
-          </figure>
-        </article>
+
+            <figure class="project-shot">
+              <div class="window-bar" aria-hidden="true">
+                <span class="window-dots"><i></i><i></i><i></i></span>
+                <span class="window-url">hea1.org/evacuation-pathfinding-lab</span>
+              </div>
+              <div class="project-shot-body">
+                <a href="./evacuation-pathfinding-lab/" aria-label="打开寻路与风险实验室">
+                  <img src="./assets/pathfinding.jpg" width="1280" height="1000" loading="lazy" decoding="async" alt="寻路实验实际画面：蓝色虚线穿过风险区，红色实线绕行，右侧可调权重和编辑地图">
+                </a>
+              </div>
+              <figcaption>
+                <span>拨动 λ 滑杆，观察红蓝路线何时分叉</span>
+                <span>18 × 12 可编辑合成网格</span>
+              </figcaption>
+            </figure>
+          </article>
+
+          <article class="project-showcase scheduling-project" id="work-03">
+            <div class="project-copy">
+              <div class="project-meta-top">
+                <span class="badge-num">LAB #03</span>
+                <span class="badge-kind">组合优化 · 精确排程</span>
+                <span class="badge-kind">MIT · v0.1.0</span>
+              </div>
+              <h4>双机调度实验室<span class="project-en">Engineering Optimization Examples</span></h4>
+              <p>
+                同一批订单交给两台效率不同的机器，先做快的、先做急的，还是交给最先空闲的机器？改一改工时和优先权重，两张同刻度甘特图立刻给出对照。
+              </p>
+              <p>
+                页面同时展示加权完工总和 <code>ΣwC</code> 与总工期——你会直观看到：把重要订单排到前面能显著压低等待代价，但未必让全部订单更早收工。
+              </p>
+
+              <div class="spec-list" aria-label="作品三规格速览">
+                <div class="spec-row">
+                  <span class="spec-key">能试什么</span>
+                  <span class="spec-val">增删 1–8 个订单、编辑两机工时与权重、甘特图逐单对照与 CLI JSON 复算</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-key">核心标尺</span>
+                  <span class="spec-val">枚举双机分配 <code>2ⁿ</code> + 机内 Smith 邻接交换比值 <code>pᵢ / wᵢ</code></span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-key">独立验证</span>
+                  <span class="spec-val">固定种子随机输入与不借用排序规则的全排列枚举基准交叉一致</span>
+                </div>
+              </div>
+
+              <div class="cta-group">
+                <a class="btn-play" href="./engineering-optimization-examples/">安排一批订单 →</a>
+                <a class="btn-play secondary" href="./notes/scheduling-priorities/">读推导笔记 →</a>
+                <a class="btn-play ghost" href="https://github.com/TH0RGOODMAN/engineering-optimization-examples" rel="noopener">GitHub 源码 ↗</a>
+              </div>
+
+              <details class="honest-drawer">
+                <summary>模型与实验边界</summary>
+                <p>
+                  AI 辅助构造的合成教学例子，不公开任何课程原题或答案。精确最优仅适用于两机、零时刻同时到达、无切换准备时间且不可中断的 <code>ΣwC</code> 目标，不代表工业生产排程表现。<a href="./notes/scheduling-priorities/">阅读推导与验证 →</a>
+                </p>
+              </details>
+            </div>
+
+            <figure class="project-shot">
+              <div class="window-bar" aria-hidden="true">
+                <span class="window-dots"><i></i><i></i><i></i></span>
+                <span class="window-url">hea1.org/engineering-optimization-examples</span>
+              </div>
+              <div class="project-shot-body">
+                <a href="./engineering-optimization-examples/" aria-label="打开双机调度实验室">
+                  <img src="./assets/scheduling.jpg" width="1280" height="1000" loading="lazy" decoding="async" alt="双机调度实际界面：订单工时与权重表，以及直观派单和精确最优方案的两张甘特图">
+                </a>
+              </div>
+              <figcaption>
+                <span>把订单 F 权重调到 10，看它如何跳到队首</span>
+                <span>2 台机器 · 1–8 个合成订单</span>
+              </figcaption>
+            </figure>
+          </article>
+        </section>
       </section>
 
       <section id="notes" class="notes-section" aria-labelledby="notes-title">
@@ -462,7 +603,7 @@
             <p>工时、优先权重和完工时间怎样一起改变订单先后，为什么降低加权完工总和未必缩短总工期。</p>
             <div class="note-foot">
               <span class="note-arrow">读笔记 →</span>
-              <span class="note-pair">配对 #03</span>
+              <span class="note-pair">配对 LAB #03</span>
             </div>
           </a>
 
@@ -482,7 +623,7 @@
             <p>在同一张合成网格上对比最短路与加权绕行路，讲清步数、风险惩罚与启发式搜索的取舍边界。</p>
             <div class="note-foot">
               <span class="note-arrow">读笔记 →</span>
-              <span class="note-pair">配对 #02</span>
+              <span class="note-pair">配对 LAB #02</span>
             </div>
           </a>
 
@@ -500,7 +641,7 @@
             <p>把工序依赖、位置距离与旋转角度拆成三把独立的尺子，让每一次失败都能给出可执行的下一步。</p>
             <div class="note-foot">
               <span class="note-arrow">读笔记 →</span>
-              <span class="note-pair">配对 #01</span>
+              <span class="note-pair">配对 LAB #01</span>
             </div>
           </a>
         </div>
@@ -509,48 +650,46 @@
       <section id="about" class="about-section" aria-labelledby="about-title">
         <div class="section-heading">
           <div>
-            <span class="section-eyebrow">ABOUT &amp; STUDIO HABITS · 关于小站</span>
-            <h2 id="about-title">慢慢做，认真玩。</h2>
+            <span class="section-eyebrow">ABOUT &amp; STUDIO · 关于这里</span>
+            <h2 id="about-title">从手边的需要出发，慢慢攒作品。</h2>
           </div>
-          <p>比起堆砌复杂的名词，我更想把一个小问题的来龙去脉摆在桌面上。</p>
+          <p>这些项目由我从实际需求出发，与 AI 一起实现和迭代。</p>
         </div>
 
         <div class="story-grid">
           <div class="story-card">
-            <span class="section-eyebrow">WHY THESE TOYS</span>
-            <h3>我常琢磨的一类问题</h3>
+            <span class="section-eyebrow">WHY I BUILD THESE</span>
+            <h3>想解决的两类事</h3>
             <p class="story-intro">
-              只有一个目标时，答案往往很直白；一旦多个条件互相拉扯，直觉就开始打架。我喜欢把这种“拉扯感”做成能亲手拨弄的界面：
+              一部分来自平时用电脑时觉得重复或不顺手的地方，另一部分来自对规则和权衡的好奇：
             </p>
             <ul class="thread-list">
-              <li><strong>约束与反馈：</strong>当顺序、位置和角度同时约束一个动作，怎样报错才不让人一头雾水？</li>
-              <li><strong>代价与权衡：</strong>为了绕开一片高风险格子，多走几步才算划算？权重滑杆把隐含假设摆到明面上。</li>
-              <li><strong>局部与整体：</strong>让高优先级任务尽早完工，和让整批任务尽早收尾，为什么常常不是同一件事？</li>
+              <li><strong>日常顺手的小工具：</strong>想让 AI 帮忙查找、整理同步目录里的文本，或者用命令切一下代理状态，就把这些具体步骤做成轻量本地接口。</li>
+              <li><strong>能亲手拨弄的模型：</strong>遇到顺序、路径风险或调度权重互相拉扯时，缩成零件、网格和甘特图，做成在浏览器里改参数就能看到结果的小实验。</li>
             </ul>
           </div>
 
           <div class="story-card warm-tint">
-            <span class="section-eyebrow">HOW THEY ARE BUILT</span>
-            <h3>做小实验的四步习惯</h3>
+            <span class="section-eyebrow">HOW THEY COME TOGETHER</span>
+            <h3>工具与实验的协作方式</h3>
             <p class="story-intro">
-              这里从装配实验起步，慢慢长出寻路和调度。每件小作品上架前，都尽量走完同一个小闭环：
+              不论是本地工具还是网页小实验，大体都按同一个路子推进：
             </p>
             <ol class="habit-steps">
-              <li><span class="habit-num">01</span><div><strong>缩成一张画板：</strong>去掉外围包袱，只留最能体现冲突的几个零件、一张小网格或几张订单。</div></li>
-              <li><span class="habit-num">02</span><div><strong>规则与画面拆开：</strong>核心计算写成纯模块，不靠肉眼看动画猜对错。</div></li>
-              <li><span class="habit-num">03</span><div><strong>用笨办法对账：</strong>另写一套独立基准（如 Bellman–Ford 或全排列枚举）交叉核对随机样本。</div></li>
-              <li><span class="habit-num">04</span><div><strong>留好复现与边界：</strong>支持 JSON 导出重算，同时把“没验证什么、不适用什么”坦诚写出来。</div></li>
+              <li><span class="habit-num">01</span><div><strong>挑出一个具体问题：</strong>先想清楚自己到底卡在哪一步，决定功能范围与取舍方向。</div></li>
+              <li><span class="habit-num">02</span><div><strong>与 AI 一起完成实现：</strong>具体代码编写、结构整理与自动化检查由 AI 协助完成，随着实际使用继续调整。</div></li>
+              <li><span class="habit-num">03</span><div><strong>分清安装与试玩：</strong>本地工具标明运行前提与构建条件，网页实验点开即可运行并导出参数。</div></li>
             </ol>
           </div>
         </div>
 
         <div class="sketchbook-banner">
           <div class="sketchbook-head">
-            <h3>案头草稿夹 · 正在推敲的下一批问题线索</h3>
+            <h3>案头草稿夹 · 还在推敲的下一批问题线索</h3>
             <span class="exploratory-pill">EXPLORING · 仅记思考方向，尚未发布为新作品</span>
           </div>
           <p class="sketchbook-lead">
-            没有做完最小可复现闭环之前，不把草稿画成成品卡片。目前桌角记着两个以后想试着拆解的小问题：
+            没有做完最小可运行闭环之前，不把草稿画成成品卡片。目前桌角记着两个以后想试着拆解的小问题：
           </p>
           <div class="sketchbook-grid">
             <div class="sketch-item">
@@ -562,11 +701,11 @@
               <p>在一张极简房间平面图上点选物件、筛选状态并导出 JSON，验证“导出再导回”能否原样恢复整张现场。</p>
             </div>
           </div>
-          <p class="english-motto" lang="en">A small studio for curiosity, modeling and playable rules — built one verifiable experiment at a time.</p>
+          <p class="english-motto" lang="en">A small studio for practical local tools and interactive modeling experiments — built from real needs with AI.</p>
           <details class="honest-drawer">
-            <summary>关于本站隐私、开源与协作方式</summary>
-            <p>本站仅使用公开代号 hea1，不设置登录、表单、Cookie、本地存储或分析埋点；画板与配色切换仅在当前页面内生效。静态托管平台可能保留常规访问日志。</p>
-            <p>页面沿用明亮造物画板风格（Gemini 协助视觉与前端重构，Codex 协助工程实现与核验），源码采用 MIT 许可公开，各实验的具体开发来源与验证边界以对应仓库文档为准。</p>
+            <summary>关于本站隐私、开源与协作</summary>
+            <p>本站仅使用公开代号 hea1，不设登录、表单、Cookie、本地存储或分析埋点；画板与配色切换仅在当前页面内生效。</p>
+            <p>主页由 Gemini 协助文案与前端设计，由 Codex 独立复核与整合。网站源码采用 MIT 许可，各链接项目的适用范围及协议以对应仓库为准。</p>
           </details>
         </div>
       </section>
@@ -574,13 +713,12 @@
 
     <footer class="play-footer">
       <div>
-        <strong>hea1</strong> · 好奇心与小实验
-        <div class="license-note">© 2026 hea1 contributors · <a href="./LICENSE">MIT License</a></div>
+        <strong>hea1</strong> · AI 工具与好奇心小实验
+        <div class="license-note">本站源码 <a href="./LICENSE">MIT License</a> · 各项目许可证以对应仓库为准</div>
       </div>
       <div class="play-footer-links">
-        <a href="./assembly-training-lab/">装配实验</a>
-        <a href="./evacuation-pathfinding-lab/">寻路实验</a>
-        <a href="./engineering-optimization-examples/">调度实验</a>
+        <a href="#tools">近期工具</a>
+        <a href="#labs">交互实验</a>
         <a href="./notes/">实验笔记</a>
         <a href="./feed.xml">Atom 订阅</a>
         <a href="https://github.com/TH0RGOODMAN" rel="noopener">GitHub</a>
