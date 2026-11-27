@@ -258,7 +258,7 @@
             <article class="tool-card" id="tool-01">
               <div class="project-meta-top">
                 <span class="badge-num badge-num--tool-drive">TOOL #01</span>
-                <span class="badge-kind">Windows Alpha · Python ≥3.12</span>
+                <span class="badge-kind">Windows Alpha · Python ≥3.11</span>
                 <span class="badge-kind">MIT</span>
               </div>
               <h4>北航云盘 MCP / CLI<span class="project-en">buaa-drive-local-mcp</span></h4>
@@ -266,7 +266,7 @@
               <figure class="tool-diagram">
                 <svg viewBox="0 0 320 112" role="img" aria-labelledby="diag-drive-title diag-drive-desc">
                   <title id="diag-drive-title">北航云盘 MCP / CLI 工作方式示意</title>
-                  <desc id="diag-drive-desc">本地同步目录中的文本文件通过 MCP 或 CLI 提供的 7 项操作与 AI 客户端连接。</desc>
+                  <desc id="diag-drive-desc">本地同步目录中的文本文件通过 MCP 或 CLI 提供的 8 项操作与 AI 客户端连接。</desc>
                   <g fill="#c5bda9">
                     <circle cx="20" cy="18" r="2.2"/><circle cx="160" cy="18" r="2.2"/><circle cx="300" cy="18" r="2.2"/>
                     <circle cx="20" cy="76" r="2.2"/><circle cx="300" cy="76" r="2.2"/>
@@ -296,7 +296,7 @@
               </figure>
 
               <p>
-                想让支持 MCP 的 AI 在指定的北航云盘同步目录里查找、读取和更新笔记，又不想把整盘目录敞开，便做了这个轻量本地桥接。它提供目录/文件名查找、小文本读取、新建目录及文本更新与状态刷新等 7 项操作，支持 Markdown / TXT 与 SHA-256 冲突保护。
+                想让支持 MCP 的 AI 在指定的北航云盘同步目录里查找、读取和更新笔记，又不想把整盘目录敞开，便做了这个轻量本地桥接。它提供授权目录自检、目录/文件名查找、小文本读取、新建目录及文本更新与状态刷新等 8 项操作，默认限 Markdown / TXT 并带 SHA-256 冲突保护。
               </p>
 
               <div class="tool-prereq" role="note">
@@ -306,16 +306,16 @@
               <div class="spec-list" aria-label="北航云盘 MCP / CLI 要点">
                 <div class="spec-row">
                   <span class="spec-key">操作支持</span>
-                  <span class="spec-val">7 项 MCP / CLI 操作（查找、读取、新建目录、文本更新、状态与刷新）</span>
+                  <span class="spec-val">8 项 MCP / CLI 操作（授权目录自检、查找、读取、新建目录、文本更新与刷新）</span>
                 </div>
                 <div class="spec-row">
                   <span class="spec-key">当前进展</span>
-                  <span class="spec-val">已发布 Windows Alpha，并完成单个文件的双机往返验证</span>
+                  <span class="spec-val">v0.2.0-alpha.1（MCP SDK v2），已完成单文件双机往返验证</span>
                 </div>
               </div>
 
               <div class="cta-group">
-                <a class="btn-play" href="https://github.com/TH0RGOODMAN/buaa-drive-local-mcp/releases/tag/v0.1.0-alpha.1" rel="noopener">Alpha 下载与说明 ↗</a>
+                <a class="btn-play" href="https://github.com/TH0RGOODMAN/buaa-drive-local-mcp/releases/tag/v0.2.0-alpha.1" rel="noopener">Alpha 下载与说明 ↗</a>
                 <a class="btn-play ghost" href="https://github.com/TH0RGOODMAN/buaa-drive-local-mcp" rel="noopener">GitHub 源码 ↗</a>
               </div>
             </article>
@@ -359,7 +359,7 @@
               </figure>
 
               <p>
-                切代理模式或查监听状态时总要切回窗口点几下，于是给运行中的 FlClash 接上了一套命令行和 9 项 stdio MCP 接口。无需模拟键鼠，即可查状态、启停监听、重连 Helper 并切换 TUN / 系统代理与路由模式，改动同步到界面并持久保存。
+                切代理模式或查监听状态时总要切回窗口点几下，于是给运行中的 FlClash 接上了一套命令行和 10 项 stdio MCP 接口。无需模拟键鼠，即可自检连通性、查状态、启停监听、重连 Helper 并切换 TUN / 系统代理与路由模式，改动同步到界面并持久保存。
               </p>
 
               <div class="tool-prereq" role="note">
@@ -369,11 +369,11 @@
               <div class="spec-list" aria-label="FlClash Control 要点">
                 <div class="spec-row">
                   <span class="spec-key">控制能力</span>
-                  <span class="spec-val">命令行与 9 项 stdio MCP（状态、监听、Helper 重连、模式切换）</span>
+                  <span class="spec-val">命令行与 10 项 stdio MCP（健康自检、状态、监听、Helper 重连与模式切换）</span>
                 </div>
                 <div class="spec-row">
                   <span class="spec-key">版本定位</span>
-                  <span class="spec-val">实验性 v0.1.0，随控制桥接改动遵循 GPL-3.0-or-later</span>
+                  <span class="spec-val">实验性 v0.2.0（MCP SDK v2），随控制桥接改动遵循 GPL-3.0-or-later</span>
                 </div>
               </div>
 

@@ -6,8 +6,8 @@ A bright, tactile pegboard-style personal studio (`C-Edition` refined) built wit
 
 ## Recent Tools
 
-- [buaa-drive-local-mcp](https://github.com/TH0RGOODMAN/buaa-drive-local-mcp) ([v0.1.0-alpha.1](https://github.com/TH0RGOODMAN/buaa-drive-local-mcp/releases/tag/v0.1.0-alpha.1), MIT): unofficial Windows Alpha (Python ≥3.12) that lets MCP-capable AI clients search, read, and update Markdown/TXT files inside a designated local Beihang Drive sync directory via 7 MCP/CLI operations, relying on the logged-in official client for sync.
-- [flclash-control](https://github.com/TH0RGOODMAN/flclash-control) ([usage & build guide](https://github.com/TH0RGOODMAN/flclash-control/blob/main/docs/usage.md), GPL-3.0-or-later): experimental v0.1.0 CLI and 9 stdio MCP operations (Windows x64 / FlClash 0.8.93, Python ≥3.11) for querying and switching a running FlClash GUI without UI automation. Requires building/installing the compatible FlClash with the control bridge first; the Release wheel is the control client only.
+- [buaa-drive-local-mcp](https://github.com/TH0RGOODMAN/buaa-drive-local-mcp) ([v0.2.0-alpha.1](https://github.com/TH0RGOODMAN/buaa-drive-local-mcp/releases/tag/v0.2.0-alpha.1), MIT): unofficial Windows Alpha (Python ≥3.11, MCP SDK v2) that lets MCP-capable AI clients inspect authorized roots, search, read, and update Markdown/TXT (or allowlisted plain-text) files inside a designated local Beihang Drive sync directory via 8 MCP/CLI operations, relying on the logged-in official client for sync.
+- [flclash-control](https://github.com/TH0RGOODMAN/flclash-control) ([v0.2.0](https://github.com/TH0RGOODMAN/flclash-control/releases/tag/v0.2.0) · [usage & build guide](https://github.com/TH0RGOODMAN/flclash-control/blob/main/docs/usage.md), GPL-3.0-or-later): experimental v0.2.0 CLI and 10 stdio MCP operations (Windows x64 / FlClash 0.8.93, Python ≥3.11, MCP SDK v2) for health diagnostics, querying, and switching a running FlClash GUI without UI automation. Requires building/installing the compatible FlClash with the control bridge first; the Release wheel is the control client only.
 
 ## Interactive Browser Labs & Notes
 
